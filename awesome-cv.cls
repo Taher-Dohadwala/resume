@@ -124,7 +124,7 @@
 \definecolor{black}{HTML}{000000}
 \definecolor{darkgray}{HTML}{333333}
 \definecolor{gray}{HTML}{5D5D5D}
-\definecolort
+%\definecolor
 % Basic colors
 \definecolor{green}{HTML}{C2E15F}
 \definecolor{orange}{HTML}{FDA333}
@@ -190,11 +190,11 @@
 \newcommand*{\headerfirstnamestyle}[1]{{\fontsize{24pt}{1em}\headerfont\bfseries\color{text} #1}}
 \newcommand*{\headerlastnamestyle}[1]{{\fontsize{24pt}{1em}\headerfont\bfseries\color{text} #1}}
 \newcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\scshape\color{darktext} #1}}
-\newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{lighttext} #1}}
+\newcommand*{\headeraddressstyle}[1]{{\fontsize{10pt}{1em}\headerfont\itshape\color{lighttext} #1}}
 \newcommand*{\headersocialstyle}[1]{{\fontsize{8pt}{1em}\headerfont\color{text} #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{14pt}{1em}\headerfont\bfseries\color{darktext}\sectioncolor{#1}}}
+\newcommand*{\sectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{darktext}\sectioncolor{#1}}}
 \newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
 \newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
 
@@ -202,11 +202,12 @@
 \newcommand*{\entrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\edentrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\entrypositionstyle}[1]{{\fontsize{9.5pt}{1em}\bodyfont\slshape\color{darktext} #1}}
-\newcommand*{\edentrypositionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\entrydatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\slshape\color{darktext} #1}}
-\newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{text} #1}}
-\newcommand*{\eddescriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\edentrypositionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{darktext} #1}}
+
+\newcommand*{\entrydatestyle}[1]{{\fontsize{9.5pt}{1em}\bodyfont\slshape\color{darktext} #1}}
+\newcommand*{\entrylocationstyle}[1]{{\fontsize{9.5pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{darktext} #1}}
+\newcommand*{\eddescriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{darktext} #1}}
 % For elements of subentry
 \newcommand*{\subentrytitlestyle}[1]{{\fontsize{8pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
 \newcommand*{\subentrypositionstyle}[1]{{\fontsize{7pt}{1em}\bodyfont\scshape\color{graytext} #1}}
@@ -222,7 +223,7 @@
 
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{9.5pt}{1em}\bodyfontlight\color{text} #1}}
+\newcommand*{\skillsetstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\color{darktext} #1}}
 
 
 %-------------------------------------------------------------------------------
@@ -591,6 +592,7 @@
 }{%
     \end{tabular*}
   \end{center}
+ 
 }
 % Define a line of cv information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
@@ -601,13 +603,12 @@
 % Define an environment for cvitems(for cventry)
 \newenvironment{cvitems}{%
   \vspace{-2.4mm}
-  \begin{justify}
-  \begin{itemize}[leftmargin=2ex, nosep,itemsep=0.3em]
+
+  \begin{itemize}[leftmargin=6ex, nosep,itemsep=0.3em]
     \setlength{\parskip}{0pt}
     \renewcommand{\labelitemi}{\bullet}
 }{%
   \end{itemize}
-  \end{justify}
   \vspace{-3.4mm}
 }
 
@@ -616,14 +617,23 @@
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{-2pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \ifempty{#1#3#4}
-      {\edentrytitlestyle{#2} \\
-        \multicolumn{1}{L{\textwidth}}{\descriptionstyle{#5}}}
-      {\ifempty{#2#3}
-          {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+
+     {\ifempty{#2#3}
+          {\edentrypositionstyle{#1} & \entrydatestyle{#4} \\}
           {\edentrytitlestyle{#2} & \entrylocationstyle{#3} \\
             \edentrypositionstyle{#1} & \entrydatestyle{#4} \\}
         \multicolumn{2}{L{\textwidth}}{\eddescriptionstyle{#5}}}
   \end{tabular*}%
 }
 
+\newcommand*{\certcventry}[5]{%
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{-10pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l L{\textwidth - 4.5cm} R{4.5cm}}
+
+    {\edentrytitlestyle{#1} \\}
+    \multicolumn{1}{L{\textwidth}}{\eddescriptionstyle{#5}}
+
+  \end{tabular*}%
+}
